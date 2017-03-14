@@ -1,0 +1,23 @@
+@import url("styles/colors.css");
+@import url("//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css");
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    font-size: 16px;
+}
+
+body {
+  color: var(--dark);
+  font-weight: lighter;
+  font: 400 15px/22px 'Open Sans', 'Helvetica Neue', Sans-serif;
+  font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+}
