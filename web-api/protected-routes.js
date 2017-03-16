@@ -33,6 +33,5 @@ app.get('/api/protected/random-quote', function(req, res) {
 
 app.post('/api/protected/toggle', function (req, res) {
   var body = req.body;
-  console.log('user ', req.user)
   res.status(200).send(toggler.ToggleOn(body.id, body.state));
 });
