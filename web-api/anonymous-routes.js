@@ -8,7 +8,7 @@ app.post('/api/random-quote', function(req, res) {
   res.status(200).send(quoter.getRandomOne());
 });
 
-app.post('/api/toggle', function (req, res) {
-  var body = req.body;
-  res.status(200).send(toggler.ToggleOn(body.id, body.state));
-});
+//app.post('/api/toggle', function (req, res) {
+//  var body = req.body;
+//  res.status(200).send(toggler.ToggleOn(body.id, body.state));
+//});

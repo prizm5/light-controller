@@ -3,7 +3,7 @@ import React, { PropTypes as T } from 'react'
 
 
   function callApi(state, id, token) {
-    fetch( '//localhost:3001/api/protected/toggle', {
+    fetch( '//192.168.0.106:3001/api/protected/toggle', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,

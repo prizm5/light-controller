@@ -25,10 +25,10 @@ var config = getConfig({
     return {
       'index.html': context.defaultTemplate({
         title: 'Home Light Controller',
-        publicPath: isDev ? 'http://0.0.0.0:3000/' : '',
+        publicPath: isDev ? 'http://localhost:3000/' : '/kightswitch/',
         meta: {
-          'name': 'auth0 React Sample',
-          'description': 'A minimal reactJS sample application showing auth0 integration'
+          'name': 'Lightswitch Controller',
+          'description': 'UI fo controlling home light switches'
         }
       })
     }
