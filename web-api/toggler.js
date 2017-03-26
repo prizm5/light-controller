@@ -6,7 +6,7 @@ var codeSendPIN = "0";
 var exec = require('child_process').exec;
 
 var sendCode = function (code) {
-  var cmd = './codesend ' + code + ' -p ' + codeSendPIN + ' -l ' + codeSendPulseLength;
+  var cmd = 'sudo ./codesend ' + code + ' -p ' + codeSendPIN + ' -l ' + codeSendPulseLength;
   console.log(cmd);
   exec(cmd, function callback(error, stdout, stderr) {
     if (error) {
