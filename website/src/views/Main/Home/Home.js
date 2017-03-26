@@ -44,11 +44,9 @@ export class Home extends React.Component {
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
-            <Navbar.Collapse>
               <Nav pullRight>
-                <NavItem eventKey={1} onClick={this.logout.bind(this)}> Welcome {profile.name}! Logout</NavItem>
+                <NavItem eventKey={1} onClick={this.logout.bind(this)}> Welcome {profile.name}! | Logout</NavItem>
               </Nav>
-            </Navbar.Collapse>
           </Navbar> 
           <div className="container">
             <ToggleButtonGroup name="Bedroom Light" id="1" token={token} />

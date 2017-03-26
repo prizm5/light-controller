@@ -18,11 +18,7 @@ var sendCode = function (code) {
     else {
       console.log("cmd success: ", stdout)
     }
-
-
-
   });
-
 }
 
 exports.ToggleOn = function (id, state) {
@@ -39,6 +35,7 @@ exports.ToggleOn = function (id, state) {
     console.log(id);
     console.log(outlet[state]);
     sendCode(outlet[state]);
+    console.log('light tiggered', outlet);
   }
   return "success";
 }

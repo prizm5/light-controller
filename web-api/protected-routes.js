@@ -1,10 +1,6 @@
 var express = require('express'),
     jwt     = require('express-jwt'),
-    config  = require('./config'),
-    quoter  = require('./quoter');
     toggler = require('./toggler');
-    jwksRsa = require('jwks-rsa');
-    ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 
 var app = module.exports = express.Router();
 
@@ -25,10 +21,7 @@ app.use(function (err, req, res, next) {
     console.log(err);
     res.status(404).json({ message: 'Page Not Found' });
   }
-});
-
-app.get('/api/protected/random-quote', function(req, res) {
-  res.status(200).send(quoter.getRandomOne());
+  console.log('auth loop');
 });
 
 app.post('/api/protected/toggle', function (req, res) {

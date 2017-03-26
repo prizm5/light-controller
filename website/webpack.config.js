@@ -2,20 +2,20 @@ const NODE_ENV = process.env.NODE_ENV;
 const dotenv = require('dotenv');
 
 const webpack = require('webpack');
-const fs      = require('fs');
-const path    = require('path'),
-      join    = path.join,
-      resolve = path.resolve;
+const fs = require('fs');
+const path = require('path'),
+  join = path.join,
+  resolve = path.resolve;
 
 const getConfig = require('hjs-webpack');
 
-const isDev  = NODE_ENV === 'development';
+const isDev = NODE_ENV === 'development';
 const isTest = NODE_ENV === 'test';
 
-const root    = resolve(__dirname);
-const src     = join(root, 'src');
+const root = resolve(__dirname);
+const src = join(root, 'src');
 const modules = join(root, 'node_modules');
-const dest    = join(root, 'dist');
+const dest = join(root, 'dist');
 
 var config = getConfig({
   isDev: isDev,
@@ -27,8 +27,9 @@ var config = getConfig({
         title: 'Home Light Controller',
         publicPath: isDev ? 'http://localhost:3000/' : '',
         meta: {
-          'name': 'Lightswitch Controller',
-          'description': 'UI fo controlling home light switches'
+          'name': 'Lightswitch Controller 2',
+          'description': 'UI for controlling home light switches',
+          'apple-mobile-web-app-capable': 'yes',
         }
       })
     }
@@ -42,17 +43,17 @@ const environmentEnv = dotenv.config({
   silent: true,
 });
 const envVariables =
-    Object.assign({}, dotEnvVars, environmentEnv);
+  Object.assign({}, dotEnvVars, environmentEnv);
 
 const defines =
   Object.keys(envVariables)
-  .reduce((memo, key) => {
-    const val = JSON.stringify(envVariables[key]);
-    memo[`__${key.toUpperCase()}__`] = val;
-    return memo;
-  }, {
-    __NODE_ENV__: JSON.stringify(NODE_ENV)
-  });
+    .reduce((memo, key) => {
+      const val = JSON.stringify(envVariables[key]);
+      memo[`__${key.toUpperCase()}__`] = val;
+      return memo;
+    }, {
+      __NODE_ENV__: JSON.stringify(NODE_ENV)
+    });
 
 config.plugins = [
   new webpack.DefinePlugin(defines)
