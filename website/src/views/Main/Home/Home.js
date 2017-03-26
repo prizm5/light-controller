@@ -56,6 +56,7 @@ export class Home extends React.Component {
             <ToggleButtonGroup name="Balcony Lights" id="3" token={token} />
             <ToggleButtonGroup name="TV" id="4" token={token} />
             <ToggleButtonGroup name="Bedroom Chargers" id="5" token={token} />
+            <ToggleButtonGroup name="All" id="6" token={token} />
           </div>
       </div>
     )

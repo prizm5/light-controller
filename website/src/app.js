@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import './app.css'
-//require('bootstrap/dist/css/bootstrap.css')
 require('bootswatch/cerulean/bootstrap.css')
 import App from 'containers/App/App'
 

@@ -16,20 +16,29 @@ var sendCode = function (code) {
       console.log('Error calling cmd stderr: ', cmd, stderr);
     }
     else {
-      console.log("cmd success: ", stdout);
+      console.log("cmd success: ", stdout)
     }
 
 
-    
+
   });
 
 }
 
-
 exports.ToggleOn = function (id, state) {
-  var outlet = outlets.filter(function (o) { return o.id == id; })[0];
-  console.log(id);
-  console.log(outlet[state]);
-  sendCode(outlet[state]);
+
+  if (id == 6) {
+    var o = outlets;
+  }
+  else {
+    var o = outlets.filter(function (o) { return o.id == id; });
+  }
+
+  for (var i = 0; i < o.length; i++) {
+    var outlet = o[i];
+    console.log(id);
+    console.log(outlet[state]);
+    sendCode(outlet[state]);
+  }
   return "success";
 }
