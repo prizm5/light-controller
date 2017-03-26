@@ -25,7 +25,7 @@ var config = getConfig({
     return {
       'index.html': context.defaultTemplate({
         title: 'Home Light Controller',
-        publicPath: isDev ? 'http://localhost:3000/' : '/kightswitch/',
+        publicPath: isDev ? 'http://localhost:3000/' : '',
         meta: {
           'name': 'Lightswitch Controller',
           'description': 'UI fo controlling home light switches'

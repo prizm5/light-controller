@@ -63,7 +63,9 @@
   "dependencies": {
     "auth0-lock": "^10.2.2",
     "bootstrap": "^3.3.5",
+    "bootswatch": "^3.3.7",
     "classnames": "^2.2.5",
+    "express": "^4.15.2",
     "jwt-decode": "^2.0.1",
     "react": "^15.3.1",
     "react-bootstrap": "^0.30.0-rc.1",
