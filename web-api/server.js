@@ -46,6 +46,5 @@ app.use(function (err, req, res, next) {
 var port = process.env.PORT || 3002;
 
 http.createServer(app).listen(port, function (err) {
-  console.log('listening in http://0localhost:' + port);
+  console.log('listening in http://localhost:' + port);
 });
-
