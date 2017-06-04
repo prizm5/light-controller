@@ -15,7 +15,7 @@ const isTest = NODE_ENV === 'test';
 const root = resolve(__dirname);
 const src = join(root, 'src');
 const modules = join(root, 'node_modules');
-const dest = join(root, 'dist');
+const dest = join(root, '../web-api/dist');
 
 var config = getConfig({
   isDev: isDev,
@@ -25,7 +25,7 @@ var config = getConfig({
     return {
       'index.html': context.defaultTemplate({
         title: 'Home Light Controller',
-        publicPath: isDev ? 'http://localhost:3000/' : '',
+        publicPath: isDev ? 'http://localhost:8080/' : '',
         meta: {
           'name': 'Lightswitch Controller 2',
           'description': 'UI for controlling home light switches',
@@ -103,7 +103,6 @@ config.resolve.alias = {
   'containers': join(src, 'containers'),
   'components': join(src, 'components'),
   'utils': join(src, 'utils'),
-
   'styles': join(src, 'styles')
 }
 // end Roots

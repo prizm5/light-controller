@@ -1,6 +1,6 @@
-var express = require('express'),
-    jwt     = require('express-jwt'),
-    toggler = require('./toggler');
+var express = require('express');
+var jwt     = require('express-jwt');
+var toggler = require('./toggler');
 
 var app = module.exports = express.Router();
 

@@ -1,5 +1,6 @@
 
 var outlets = require('./outlets.json');
+var promise = require('promise');
 var codeSendPulseLength = "189";
 var codeSendPIN = "0";
 
@@ -16,10 +17,11 @@ var sendCode = function (code) {
       console.log('Error calling cmd stderr: ', cmd, stderr);
     }
     else {
-      console.log("cmd success: ", stdout)
+      console.log("cmd success: ", stdout);
     }
   });
 }
+
 
 exports.ToggleOn = function (id, state) {
 
@@ -30,12 +32,14 @@ exports.ToggleOn = function (id, state) {
     var o = outlets.filter(function (o) { return o.id == id; });
   }
 
-  for (var i = 0; i < o.length; i++) {
-    var outlet = o[i];
-    console.log(id);
-    console.log(outlet[state]);
-    sendCode(outlet[state]);
-    console.log('light tiggered', outlet);
-  }
+  function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+  o.reduce((promise, outlet) =>
+      promise . then(() => wait(500)) . then(() => {
+        sendCode(outlet[state]);
+        console.log('Light tiggered', outlet.id)}
+      ),
+    Promise.resolve());
+
   return "success";
 }

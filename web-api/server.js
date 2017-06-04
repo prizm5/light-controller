@@ -1,3 +1,4 @@
+const path = require('path')
 var express       = require('express');
 var logger        = require('morgan');
 var cookieParser  = require('cookie-parser');
@@ -21,6 +22,13 @@ app.use(cookieParser());
 
 app.use(require('./protected-routes'));
 app.use(require('./user-routes'));
+
+const publicPath = express.static(path.join(__dirname, 'dist'))
+const indexPath = path.join(__dirname, '/dist/index.html')
+app.use('/', publicPath)
+app.get('/index.html', function (_, res) { res.sendFile(indexPath) })
+app.get('/login', function (_, res) { res.sendFile(indexPath) })
+app.get('/home', function (_, res) { res.sendFile(indexPath) })
 
 var cleanse = function (res) {
   res.removeHeader('Access-Control-Allow-Origin');
