@@ -1,8 +1,8 @@
-import React, { PropTypes as T } from 'react'
-import { Button, ButtonGroup, Nav, Navbar, NavItem } from 'react-bootstrap'
-import AuthService from 'utils/AuthService'
-import styles from './styles.module.css'
-import { ToggleButtonGroup } from '../../../Components/ToggleButtonGroup'
+import React, { PropTypes as T } from "react";
+import { Button, ButtonGroup, Nav, Navbar, NavItem } from "react-bootstrap";
+import AuthService from "utils/AuthService";
+import styles from "./styles.module.css";
+import { ToggleButtonGroup } from "../../../Components/ToggleButtonGroup";
 
 export class Home extends React.Component {
   static contextTypes = {
@@ -21,9 +21,9 @@ export class Home extends React.Component {
     this.token = {
       token: props.auth.getToken()
     }
-    props.auth.on('profile_updated', (newProfile) => {
-      this.setState({ profile: newProfile })
-    })
+    props.auth.on("profile_updated", (newProfile) => {
+      this.setState({ profile: newProfile });
+    });
   }
 
   logout() {
@@ -33,8 +33,8 @@ export class Home extends React.Component {
 
 
   render() {
-    const { profile } = this.state
-    const { token } = this.token
+    const { profile } = this.state;
+    const { token } = this.token;
     return (
       <div className={styles.root}>
         <Navbar inverse collapseOnSelect>
@@ -42,10 +42,13 @@ export class Home extends React.Component {
             <Navbar.Brand>
               <a href="#">RF Outlets</a>
             </Navbar.Brand>
+            <Navbar.Toggle />
           </Navbar.Header>
-          <Nav pullRight>
-            <NavItem eventKey={1} onClick={this.logout.bind(this)}> Welcome {profile.name}! | Logout</NavItem>
-          </Nav>
+          <Navbar.Collapse>
+            <Nav pullRight>
+              <NavItem eventKey={1} onClick={this.logout.bind(this)}> Welcome {profile.name}! | Logout</NavItem>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
         <div className="container">
           <ToggleButtonGroup name="Bedroom Light" id="1" token={token} />

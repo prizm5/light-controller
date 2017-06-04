@@ -15,7 +15,7 @@ const isTest = NODE_ENV === 'test';
 const root = resolve(__dirname);
 const src = join(root, 'src');
 const modules = join(root, 'node_modules');
-const dest = join(root, '../web-api/dist');
+const dest = isDev ? join(root, 'dist') : join(root, '../web-api/dist');
 
 var config = getConfig({
   isDev: isDev,
@@ -25,11 +25,12 @@ var config = getConfig({
     return {
       'index.html': context.defaultTemplate({
         title: 'Home Light Controller',
-        publicPath: isDev ? 'http://localhost:8080/' : '',
-        meta: {
+        publicPath: isDev ? 'http://localhost:3000/' : '',
+        metaTags: {
           'name': 'Lightswitch Controller 2',
           'description': 'UI for controlling home light switches',
           'apple-mobile-web-app-capable': 'yes',
+          'mobile-web-app-capable': 'yes',
         }
       })
     }
