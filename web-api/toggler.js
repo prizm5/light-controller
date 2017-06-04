@@ -35,10 +35,10 @@ exports.ToggleOn = function (id, state) {
   function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
   o.reduce((promise, outlet) =>
-      promise . then(() => wait(500)) . then(() => {
+      promise.then(() => {
         sendCode(outlet[state]);
         console.log('Light tiggered', outlet.id)}
-      ),
+      ).then(() => wait(600)) ,
     Promise.resolve());
 
   return "success";
