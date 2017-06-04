@@ -6,6 +6,6 @@ export default {
     AppDispatcher.dispatch({
       actionType: QUOTE_GET,
       quote: quote
-    })
+    });
   }
 }

@@ -43,7 +43,7 @@ app.use(function (err, req, res, next) {
   res.status(500).send();
 });
 
-var port = process.env.PORT || 3002;
+var port = process.env.PORT || 3001;
 
 http.createServer(app).listen(port, function (err) {
   console.log('listening in http://localhost:' + port);
