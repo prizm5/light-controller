@@ -53,12 +53,12 @@ class Main extends Component {
             title="Home Light Controller"
           />
 
-          <ButtonGroup name="Bedroom"           buttonid="2" />
-          <ButtonGroup name="Bedroom Chargers"  buttonid="5" />
-          <ButtonGroup name="Livingromm"        buttonid="1" />
-          <ButtonGroup name="Couch"             buttonid="3" />
-          <ButtonGroup name="TV"                buttonid="5" />
-          <ButtonGroup name="Everything"        buttonid="6" />
+          <ButtonGroup name="Bedroom"           buttonId="2" />
+          <ButtonGroup name="Bedroom Chargers"  buttonId="5" />
+          <ButtonGroup name="Livingromm"        buttonId="1" />
+          <ButtonGroup name="Couch"             buttonId="3" />
+          <ButtonGroup name="TV"                buttonId="5" />
+          <ButtonGroup name="Everything"        buttonId="6" />
         </div>
       </MuiThemeProvider>
     );

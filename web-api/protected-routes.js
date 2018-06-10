@@ -4,6 +4,14 @@ var toggler = require('./toggler');
 
 var app = module.exports = express.Router();
 
+RedisSMQ = require("rsmq");
+rsmq = new RedisSMQ({ host: "192.168.0.102", port: 6379, ns: "rsmq" });
+rsmq.createQueue({ qname: "myqueue" }, (err, resp) => {
+	if (resp === 1) {
+		console.log("queue created")
+	}
+});
+
 var jwtCheck = jwt({
   secret: process.env.AUTH0_CLIENT_SECRET,
   audience: process.env.AUTH0_CLIENT_ID,
@@ -25,6 +33,11 @@ app.use(function (err, req, res, next) {
 });
 
 app.post('/api/protected/toggle', function (req, res) {
-  var body = req.body;
-  res.status(200).send(toggler.ToggleOn(body.id, body.state));
+    var msg = JSON.stringify({id: body.id, action: body.state});
+    rsmq.sendMessage({ qname: "myqueue", message: msg }, function (err, resp) {
+      if (resp) {
+        console.log("Message sent. ID:", resp);
+      }
+    }); var body = req.body;
+  res.status(200).send("success");
 });

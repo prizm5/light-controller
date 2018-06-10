@@ -21,10 +21,17 @@ class ButtonGroup extends React.Component {
     };
   }
 
-  handleTouchTap = (b) => {
+  handleOnTouchTap = () => {
     this.setState({
       open: true,
     });
+    console.log('button on', this.props.buttonId);
+  }
+  handleOffTouchTap = () => {
+    this.setState({
+      open: true,
+    });
+    console.log('button off', this.props.buttonId);
   }
 
   render() {
@@ -33,13 +40,14 @@ class ButtonGroup extends React.Component {
         <RaisedButton
             label="On"
             primary={true}
-            onTouchTap={this.handleTouchTap}
+            onTouchTap={this.handleOnTouchTap}
             style={styles.button}
+
             />
         <RaisedButton
             label="Off"
             secondary={true}
-            onTouchTap={this.handleTouchTap}
+            onTouchTap={this.handleOffTouchTap}
             style={styles.button}
             />
         <Divider />
