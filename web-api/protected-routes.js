@@ -32,11 +32,12 @@ app.use((err, req, res, next) => {
 });
 
 app.post('/api/protected/toggle', (req, res) => {
+    var body = req.body;
     var msg = JSON.stringify({id: body.id, action: body.state});
     rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
       if (resp) {
         console.log("Message sent. ID:", resp);
       }
-    }); var body = req.body;
+    }); 
   res.status(200).send("success");
 });
