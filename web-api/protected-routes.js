@@ -1,7 +1,7 @@
-import { Router } from "express";
-import jwt from "express-jwt";
+var express = require('express');
+var jwt     = require('express-jwt');
 
-var app = module.exports = Router();
+var app = module.exports = express.Router();
 
 RedisSMQ = require("rsmq");
 rsmq = new RedisSMQ({ host: "192.168.0.102", port: 6379, ns: "rsmq" });
@@ -18,8 +18,8 @@ var jwtCheck = jwt({
   algorithms: ['RS256']
 });
 
-use('/api/protected', jwtCheck);
-use((err, req, res, next) => {
+app.use('/api/protected', jwtCheck);
+app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     console.log(err);
     res.status(401).json({ message: 'Missing or invalid token' });
@@ -31,7 +31,7 @@ use((err, req, res, next) => {
   console.log('auth loop');
 });
 
-post('/api/protected/toggle', (req, res) => {
+app.post('/api/protected/toggle', (req, res) => {
     var msg = JSON.stringify({id: body.id, action: body.state});
     rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
       if (resp) {
