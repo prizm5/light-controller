@@ -4,7 +4,7 @@ var jwt     = require('express-jwt');
 var app = module.exports = express.Router();
 
 RedisSMQ = require("rsmq");
-rsmq = new RedisSMQ({ host: "192.168.0.102", port: 6379, ns: "rsmq" });
+rsmq = new RedisSMQ({ host: "127.0.0.1", port: 6379, ns: "rsmq" });
 rsmq.createQueue({ qname: "myqueue" }, (err, resp) => {
 	if (resp === 1) {
 		console.log("queue created")
