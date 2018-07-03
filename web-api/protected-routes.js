@@ -2,9 +2,9 @@ var express = require('express');
 var jwt     = require('express-jwt');
 
 var app = module.exports = express.Router();
-
+var mqhost = process.env.MQHOST || "192.168.0.102";
 RedisSMQ = require("rsmq");
-rsmq = new RedisSMQ({ host: "192.168.0.102", port: 6379, ns: "rsmq" });
+rsmq = new RedisSMQ({ host: mqhost, port: 6379, ns: "rsmq" });
 rsmq.createQueue({ qname: "myqueue" }, (err, resp) => {
 	if (resp === 1) {
 		console.log("queue created")
@@ -31,13 +31,28 @@ app.use((err, req, res, next) => {
   console.log('auth loop');
 });
 
-app.post('/api/protected/toggle', (req, res) => {
-    var body = req.body;
-    var msg = JSON.stringify({id: body.id, action: body.state});
-    rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
-      if (resp) {
-        console.log("Message sent. ID:", resp);
+var sendMessage = (id, action) => {
+	var msg = JSON.stringify({ id: id, action: action });
+  return rsmq.sendMessage({ qname: "myqueue", message: msg }, 
+    (err, resp) => {
+      if (resp) { 
+        console.log("Message sent. ID:", resp); 
+        return true;
       }
-    }); 
+      else { return false; }
+	});
+}
+
+app.post('/api/protected/toggle', (req, res) => {
+  var body = req.body;
+  var msg = JSON.stringify({id: body.id, action: body.state});
+  if(body.id == 6) {
+    for (let index = 1; index < 6; index++) {
+      sendMessage(index, body.action);
+    }
+  }
+  else {
+    sendMessage(body.id, body.action);
+  }
   res.status(200).send("success");
 });
