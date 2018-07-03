@@ -2,7 +2,7 @@ var express = require('express');
 var jwt     = require('express-jwt');
 
 var app = module.exports = express.Router();
-var mqhost = process.env.MQHOST || "192.168.0.102";
+var mqhost = process.env.MQHOST || "127.0.0.1";
 RedisSMQ = require("rsmq");
 var rsmq = new RedisSMQ({ host: mqhost, port: 6379, ns: "rsmq" });
 rsmq.createQueue({ qname: "myqueue" }, (err, resp) => {
