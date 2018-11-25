@@ -1,5 +1,6 @@
 var express = require('express');
 var jwt     = require('express-jwt');
+var outlets = require('./outlets.json');
 
 var app = module.exports = express.Router();
 
@@ -34,6 +35,36 @@ app.use((err, req, res, next) => {
 app.post('/api/protected/toggle', (req, res) => {
     var body = req.body;
     var msg = JSON.stringify({id: body.id, action: body.state});
+    rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
+      if (resp) {
+        console.log("Message sent. ID:", resp);
+      }
+    }); 
+  res.status(200).send("success");
+});
+
+
+var apikey = process.env.apikey;
+
+let convertLightnameToId = (str) => {
+  let plugs =  outlets.filter(function (o) {
+    return o.toLowerCase().name === str;
+  });
+  if(plugs.length > 0 ){
+    return plugs[0].id;  
+  }
+  return 0;
+};
+
+app.post('/api/secure/toggle', (req, res) => {
+    var key = req.query.apikey;
+    if(key !== apikey){
+      res.status(404).send("unauthorized");
+      return;
+    }
+    var body = req.body;
+    var lightId = convertLightnameToId(body.name);
+    var msg = JSON.stringify({id: lightId, action: body.state});
     rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
       if (resp) {
         console.log("Message sent. ID:", resp);
