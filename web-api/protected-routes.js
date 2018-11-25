@@ -50,6 +50,7 @@ let convertLightnameToId = (str) => {
   console.log('looking up light name: ', str);
   let plugs =  outlets.filter(function (o) {
     return o.toLowerCase()
+            .trim()
             .substring(0,15)
             .Replace(' ','')
             .name === str;
@@ -69,6 +70,7 @@ app.post('/api/secure/toggle', (req, res) => {
   else {
     var body = req.body;
     var lightId = convertLightnameToId(body.name);
+    console.log('lightid',lightId);
     var msg = JSON.stringify({id: lightId, action: body.state});
     rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
       if (resp) {
