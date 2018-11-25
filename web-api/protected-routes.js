@@ -49,7 +49,10 @@ var apikey = process.env.apikey;
 let convertLightnameToId = (str) => {
   console.log('looking up light name: ', str);
   let plugs =  outlets.filter(function (o) {
-    return o.toLowerCase().name === str;
+    return o.toLowerCase()
+            .substring(0,15)
+            .Replace(' ','')
+            .name === str;
   });
   if(plugs.length > 0 ){
     return plugs[0].id;  
@@ -60,7 +63,7 @@ let convertLightnameToId = (str) => {
 app.post('/api/secure/toggle', (req, res) => {
   console.log('toggling from google', req);
   var key = req.query.apikey;
-  if(key !== apikey){
+  if(key && key.substring(0,40) !== apikey){
     res.status(404).send("unauthorized");
     return;
   }
