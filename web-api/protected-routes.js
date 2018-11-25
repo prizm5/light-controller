@@ -49,11 +49,11 @@ var apikey = process.env.apikey;
 let convertLightnameToId = (str) => {
   console.log('looking up light name: ', str);
   let plugs =  outlets.filter(function (o) {
-    return o.toLowerCase()
-            .trim()
-            .substring(0,15)
-            .Replace(' ','')
-            .name === str;
+    return o.name === str
+                      .substring(0,15)
+                      .trim()
+                      .toLowerCase()
+                      .Replace(' ','');
   });
   if(plugs.length > 0 ){
     return plugs[0].id;  
