@@ -53,7 +53,7 @@ let convertLightnameToId = (str) => {
     var val = str.substring(0,15)
                  .trim()
                  .toLowerCase()
-                 .Replace(' ','');
+                 .replace(' ','');
     console.log(val);
     return o.name === val;
   });
