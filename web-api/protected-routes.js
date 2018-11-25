@@ -47,6 +47,7 @@ app.post('/api/protected/toggle', (req, res) => {
 var apikey = process.env.apikey;
 
 let convertLightnameToId = (str) => {
+  console.log('looking up light name: ', str);
   let plugs =  outlets.filter(function (o) {
     return o.toLowerCase().name === str;
   });
@@ -57,18 +58,19 @@ let convertLightnameToId = (str) => {
 };
 
 app.post('/api/secure/toggle', (req, res) => {
-    var key = req.query.apikey;
-    if(key !== apikey){
-      res.status(404).send("unauthorized");
-      return;
+  console.log('toggling from google', req);
+  var key = req.query.apikey;
+  if(key !== apikey){
+    res.status(404).send("unauthorized");
+    return;
+  }
+  var body = req.body;
+  var lightId = convertLightnameToId(body.name);
+  var msg = JSON.stringify({id: lightId, action: body.state});
+  rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
+    if (resp) {
+      console.log("Message sent. ID:", resp);
     }
-    var body = req.body;
-    var lightId = convertLightnameToId(body.name);
-    var msg = JSON.stringify({id: lightId, action: body.state});
-    rsmq.sendMessage({ qname: "myqueue", message: msg }, (err, resp) => {
-      if (resp) {
-        console.log("Message sent. ID:", resp);
-      }
-    }); 
+  }); 
   res.status(200).send("success");
 });
