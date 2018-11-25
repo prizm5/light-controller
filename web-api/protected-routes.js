@@ -62,7 +62,8 @@ let convertLightnameToId = (str) => {
 };
 
 app.post('/api/secure/toggle', (req, res) => {
-  console.log('toggling from google', req);
+  console.log('toggling from google', req.query);
+  console.log('toggling from google', req.body);
   var key = req.query.apikey;
   if(!key || key.substring(0,40) !== apikey){
     res.status(404).send("unauthorized");
