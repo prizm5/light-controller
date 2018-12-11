@@ -43,18 +43,17 @@ app.post('/api/protected/toggle', (req, res) => {
   res.status(200).send("success");
 });
 
-
-var apikey = process.env.apikey;
-
 let convertLightnameToId = (str) => {
+  console.log('light name: ', str);
+  var val = str.substring(0,15)
+                .trim()
+                .toLowerCase()
+                .replace('the','')
+                .replace(' ','')
+                .replace(' ','')
+                .replace(' ','');
+  console.log('trimmed name: ', val);
   let plugs =  outlets.filter(function (o) {
-    var val = str.substring(0,15)
-                 .trim()
-                 .toLowerCase()
-                 .replace('the','')
-                 .replace(' ','')
-                 .replace(' ','')
-                 .replace(' ','');
     return o.name === val;
   });
   if(plugs.length > 0 ){
@@ -63,6 +62,7 @@ let convertLightnameToId = (str) => {
   return 0;
 };
 
+var apikey = process.env.apikey;
 app.post('/api/secure/toggle', (req, res) => {
   var key = req.query.apikey;
   if(!key || key.substring(0,40) !== apikey){
