@@ -45,12 +45,12 @@ app.post('/api/protected/toggle', (req, res) => {
 
 let convertLightnameToId = (str) => {
   console.log('light name: ', str);
-  var val = str.substring(0,15)
+  var val = str.substring(0,20)
                 .trim()
                 .toLowerCase()
                 .replace('the','')
-                .replace(' ','')
-                .replace(' ','');
+                .split(' ')
+                .join('');
   console.log('trimmed name: ', val);
   let plugs =  outlets.filter(function (o) {
     return o.name === val;
