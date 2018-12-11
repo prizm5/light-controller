@@ -50,7 +50,6 @@ let convertLightnameToId = (str) => {
                 .toLowerCase()
                 .replace('the','')
                 .replace(' ','')
-                .replace(' ','')
                 .replace(' ','');
   console.log('trimmed name: ', val);
   let plugs =  outlets.filter(function (o) {
